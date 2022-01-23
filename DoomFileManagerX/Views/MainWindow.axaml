@@ -7,11 +7,32 @@
         x:Class="DoomFileManagerX.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="{Binding WindowHeader}">
-
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+	<Window.Resources>
+		<TreeDataTemplate x:Key="TreeTemplate" ItemsSource="{Binding Path=Children}" >
+			<Button
+			  ToolTip.Tip="{Binding Path=FullPathName, Mode=OneTime}"
+			  Command="{Binding Path=DataContext.SelectedPathFromTreeCommand, 
+                   RelativeSource = {RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+			  CommandParameter="{Binding FullPathName}"
+        
+			  Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Height="20"
+			  Focusable="False" ClickMode="Press">				
+				<StackPanel Orientation="Horizontal" Margin="0" VerticalAlignment="Stretch" >					
+					<TextBlock Margin="5,0,0,0" Text="{Binding VisibleName, Mode=OneTime}"/>
+				</StackPanel>
+			</Button>
+		</TreeDataTemplate>
+	</Window.Resources>
+	<StackPanel>
+		<TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<TreeView BorderThickness="0" 
+				  Items="{Binding RootChildren}"
+				  Template="{StaticResource TreeTemplate}">
+			<TreeView.Styles>
+				<Style Selector="TreeViewItem">
+					<Setter Property="IsExpanded" Value="{Binding Path=IsExpanded, Mode=TwoWay}"/>
+				</Style>
+			</TreeView.Styles>
+		</TreeView>
+	</StackPanel>
 </Window>
