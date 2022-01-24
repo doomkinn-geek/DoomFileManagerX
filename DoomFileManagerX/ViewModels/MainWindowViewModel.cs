@@ -1,4 +1,5 @@
 using DoomFileManagerX.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -29,10 +30,13 @@ namespace DoomFileManagerX.ViewModels
         public MainWindowViewModel(ITreeItem root)
         {
             _root = root;
+            //Type selectedType = typeof(DriveRootItem);
+            //TreeItem rootItem = (TreeItem)Activator.CreateInstance(selectedType);
+            DriveRootItem rootItem = new DriveRootItem();
             this.rootChildren = new ObservableCollection<ITreeItem>(
                 new ITreeItem[]
                 {
-                    _root
+                    rootItem,
                 });
         }
     }
