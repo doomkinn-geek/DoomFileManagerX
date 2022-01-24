@@ -15,12 +15,7 @@ namespace DoomFileManagerX.Views
 #if DEBUG
             this.AttachDevTools();
 #endif
-            ITreeItem rootItem = new FolderItem
-            {
-                VisibleName = "Drives",
-                IncludeFileChildren = false,
-                FullPathName = "DrivesRoot",
-            };            
+            DriveRootItem rootItem = new DriveRootItem();                  
             _mainWindowView = new MainWindowViewModel(rootItem);
             base.DataContext = _mainWindowView; 
         }

@@ -9,7 +9,8 @@ namespace DoomFileManagerX.ViewModels
     {
         readonly ITreeItem _root;
         private ObservableCollection<ITreeItem> rootChildren = new ObservableCollection<ITreeItem> { };
-        public string WindowHeader => "Cross-platform version of File Manager";
+        public string WindowHeader => "Кросс платформенная версия файлового менеджера";
+        public string Greetings => "Приветствие";
         RelayCommand selectedPathFromTreeCommand;
         public ICommand SelectedPathFromTreeCommand => selectedPathFromTreeCommand ??
                        (selectedPathFromTreeCommand =
@@ -20,7 +21,13 @@ namespace DoomFileManagerX.ViewModels
         public string SelectedPath
         {
             get => selectedPath; 
-            set => selectedPath = value; 
+            //set => selectedPath = value;
+            set 
+            {
+                //this.SetProperty(ref selectedPath, value, "SelectedPath");
+                selectedPath = value;
+                Notify();
+            }
         }
         public ObservableCollection<ITreeItem> RootChildren
         {
@@ -29,14 +36,11 @@ namespace DoomFileManagerX.ViewModels
         }
         public MainWindowViewModel(ITreeItem root)
         {
-            _root = root;
-            //Type selectedType = typeof(DriveRootItem);
-            //TreeItem rootItem = (TreeItem)Activator.CreateInstance(selectedType);
-            DriveRootItem rootItem = new DriveRootItem();
+            _root = root;                        
             this.rootChildren = new ObservableCollection<ITreeItem>(
                 new ITreeItem[]
                 {
-                    rootItem,
+                    _root,
                 });
         }
     }
