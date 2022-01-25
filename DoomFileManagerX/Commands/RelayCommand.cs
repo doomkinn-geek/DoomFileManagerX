@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace DoomFileManagerX.ViewModels
+namespace DoomFileManagerX.Commands
 {
     public class RelayCommand : ICommand
     {

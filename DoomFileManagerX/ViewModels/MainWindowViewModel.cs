@@ -1,3 +1,4 @@
+using DoomFileManagerX.Commands;
 using DoomFileManagerX.Models;
 using System;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ namespace DoomFileManagerX.ViewModels
         readonly ITreeItem _root;
         private ObservableCollection<ITreeItem> rootChildren = new ObservableCollection<ITreeItem> { };
         public string WindowHeader => "Кросс платформенная версия файлового менеджера";
-        public string Greetings => "Приветствие";
+        public string Greeting => "Приветствие";
         RelayCommand selectedPathFromTreeCommand;
         public ICommand SelectedPathFromTreeCommand => selectedPathFromTreeCommand ??
                        (selectedPathFromTreeCommand =
