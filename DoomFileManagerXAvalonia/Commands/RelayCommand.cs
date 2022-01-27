@@ -34,7 +34,7 @@ namespace DoomFileManagerX.Commands
             _canExecute = canExecute;
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
         #endregion
 
         #region ICommand Members

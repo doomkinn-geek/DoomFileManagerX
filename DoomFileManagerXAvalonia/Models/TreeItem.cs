@@ -10,7 +10,7 @@ namespace DoomFileManagerX.Models
 {
     public abstract class TreeItem : ViewModelBase, ITreeItem
     {
-        public string VisibleName { get; set; }
+        public string? VisibleName { get; set; }
         public string FullPathName { get; set; }
 
         protected ObservableCollection<ITreeItem> children;

@@ -16,7 +16,7 @@ namespace DoomFileManagerX.Views
             this.AttachDevTools();
 #endif
             DriveRootItem rootItem = new DriveRootItem();                  
-            _mainWindowView = new MainWindowViewModel(rootItem);
+            _mainWindowView = new MainWindowViewModel(rootItem);            
             base.DataContext = _mainWindowView; 
         }
 

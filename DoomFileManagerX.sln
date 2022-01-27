@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomFileManagerX", "DoomFileManagerX\DoomFileManagerX.csproj", "{08EFCE92-56D5-4C1B-812F-D6502C60179D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoomFileManagerXAvaloniaBAD", "DoomFileManagerXAvalonia\DoomFileManagerXAvaloniaBAD.csproj", "{08EFCE92-56D5-4C1B-812F-D6502C60179D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoomFileManagerX", "DoomFileManagerX\DoomFileManagerX.csproj", "{5F33B0BC-65F3-4A63-B107-A27E94D0F7B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tree+List+ViewTEST", "Tree+List+View\Tree+List+ViewTEST.csproj", "{96A0C98A-292D-4150-9A5A-9FB61448627B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{08EFCE92-56D5-4C1B-812F-D6502C60179D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08EFCE92-56D5-4C1B-812F-D6502C60179D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08EFCE92-56D5-4C1B-812F-D6502C60179D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F33B0BC-65F3-4A63-B107-A27E94D0F7B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F33B0BC-65F3-4A63-B107-A27E94D0F7B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F33B0BC-65F3-4A63-B107-A27E94D0F7B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F33B0BC-65F3-4A63-B107-A27E94D0F7B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96A0C98A-292D-4150-9A5A-9FB61448627B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96A0C98A-292D-4150-9A5A-9FB61448627B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96A0C98A-292D-4150-9A5A-9FB61448627B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96A0C98A-292D-4150-9A5A-9FB61448627B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

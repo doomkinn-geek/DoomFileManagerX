@@ -1,3 +1,4 @@
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ namespace DoomFileManagerX.ViewModels
     //public class ViewModelBase : ReactiveObject
     public class ViewModelBase : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;       
+        public event PropertyChangedEventHandler? PropertyChanged;       
 
         public virtual void Notify([CallerMemberName] string propName = null)
         {

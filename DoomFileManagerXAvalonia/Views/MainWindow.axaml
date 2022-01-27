@@ -45,20 +45,28 @@
 					<Grid.RowDefinitions>
 						<RowDefinition Height="*"/>
 						<RowDefinition Height="Auto"/>
-					</Grid.RowDefinitions>					
-						<TreeView BorderThickness="3,3,3,3"
-								  Items="{Binding RootChildren}"
-								  ItemTemplate="{StaticResource TreeTemplate}">
+					</Grid.RowDefinitions>
+					<StackPanel Grid.Column="0">
+						<TreeView ScrollViewer.HorizontalScrollBarVisibility="Visible"
+								  
+								  VerticalAlignment="Stretch"
+								Items="{Binding RootChildren}"								  
+								ItemTemplate="{StaticResource TreeTemplate}">
 							<TreeView.Styles>
 								<Style Selector="TreeViewItem">
 									<Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
 								</Style>								
 							</TreeView.Styles>
-						</TreeView>					
+						</TreeView>	
+					</StackPanel>					
 				</Grid>
 			</StackPanel>
 			<StackPanel Grid.Column="1" >				
-			</StackPanel>
+				<ItemsRepeater ScrollViewer.HorizontalScrollBarVisibility="Visible"
+							Items="{Binding RootChildren}">
+
+				</ItemsRepeater>
+			</StackPanel>			
 		</Grid>		
 	</Grid>
 </Window>

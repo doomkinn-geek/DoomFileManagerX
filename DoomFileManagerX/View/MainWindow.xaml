@@ -1,0 +1,45 @@
+﻿<Window x:Class="DoomFileManagerX.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DoomFileManagerX"
+        xmlns:vw="clr-namespace:DoomFileManagerX.View"
+        mc:Ignorable="d"
+        Height="450" Width="800"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="{Binding WindowHeader}">
+
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" Margin="5" Orientation="Horizontal">
+            <Label Content="Selected Path: " FontSize="12"/>
+            <TextBlock FontSize="12" Padding="5" Text="{Binding SelectedPath}"/>
+        </StackPanel>
+        
+        <Grid Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <GroupBox Header="{Binding MainTreeHeader}" Grid.Column="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <vw:FolderTreeView x:Name="mainTree" Grid.Row="0"/>                    
+                </Grid>
+            </GroupBox>
+            
+            <GroupBox Grid.Column="1" Header="DetailsHeader">
+                <ListView Grid.Column="1" Name="ListView" ItemsSource="{Binding Path=RootChildren}"></ListView>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>
