@@ -5,32 +5,36 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
-namespace DoomFileManagerX.Models
+namespace DoomFileManagerX.Models.TreeItems
 {
     public class DriveRootItem : TreeItem
     {
         public DriveRootItem()
-        {
-            //Constructor sets some properties
-            VisibleName = "DriveRoot";
+        {            
+            VisibleName = "ROOT";
             IsExpanded = true;
-            FullPathName = "$xxDriveRoot$";
+            FullPathName = "DriveRoot";
+        }
+
+        public override BitmapSource GetMyIcon()
+        {            
+            string Param = "pack://application:,,,/" + "MyImages/bullet_blue.png";
+            Uri uri1 = new Uri(Param, UriKind.RelativeOrAbsolute);
+            return myIcon = BitmapFrame.Create(uri1);
         }
         public override ObservableCollection<ITreeItem> GetMyChildren()
         {
             ObservableCollection<ITreeItem> childrenList = new ObservableCollection<ITreeItem>() { };
             ITreeItem item1;
             string fn = "";
-
-            //string[] allDrives = System.Environment.GetLogicalDrives();
+           
             DriveInfo[] allDrives = DriveInfo.GetDrives();
             foreach (DriveInfo drive in allDrives)
                 if (drive.IsReady)
                 {
-                    item1 = new DriveItem();
-
-                    // Some processing for the FriendlyName
+                    item1 = new DriveItem();                    
                     fn = drive.Name.Replace(@"\", "");
                     item1.FullPathName = fn;
                     if (drive.VolumeLabel == string.Empty)

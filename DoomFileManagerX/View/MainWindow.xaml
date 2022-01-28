@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         
         <StackPanel Grid.Row="0" Margin="5" Orientation="Horizontal">
-            <Label Content="Selected Path: " FontSize="12"/>
+            <Label Content="Текущая папка: " FontSize="12"/>
             <TextBlock FontSize="12" Padding="5" Text="{Binding SelectedPath}"/>
         </StackPanel>
         
@@ -37,8 +37,8 @@
                 </Grid>
             </GroupBox>
             
-            <GroupBox Grid.Column="1" Header="DetailsHeader">
-                <ListView Grid.Column="1" Name="ListView" ItemsSource="{Binding Path=RootChildren}"></ListView>
+            <GroupBox Grid.Column="1" Header="Подробности">
+                <vw:DetailsListView x:Name="detailsList" Grid.Row="1"/>
             </GroupBox>
         </Grid>
     </Grid>

@@ -1,7 +1,11 @@
 using DoomFileManagerX.Commands;
 using DoomFileManagerX.Models;
+using DoomFileManagerX.Models.DetailsItems;
+using DoomFileManagerX.Models.TreeItems;
 using System;
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace DoomFileManagerX.ViewModels
@@ -9,18 +13,28 @@ namespace DoomFileManagerX.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         readonly ITreeItem _root;
+        private IDetailsItem _detail;
         private ObservableCollection<ITreeItem> rootChildren = new ObservableCollection<ITreeItem> { };
         private string selectedPath;
         private RelayCommand treeClickEventCommand;
-        private RelayCommand selectedPathFromTreeCommand;
-        public string WindowHeader => "Кросс платформенная версия файлового менеджера";
+        
+        public string WindowHeader => "Windows версия файлового менеджера";
         public string Greeting => "Приветствие";
-        public ICommand SelectedPathFromTreeCommand => selectedPathFromTreeCommand ??
-                       (selectedPathFromTreeCommand =
-                              new RelayCommand(x => SelectedPath = x as string));
+        public IDetailsItem Detail
+        {
+            get => _detail;
+            set
+            {
+                _detail = value;
+                Notify();
+            }
+        }
         private void DoTreeClickEventCommand(object parameter)
         {
-            int i = 0;
+            TreeView control = parameter as TreeView;
+            ITreeItem selected = control.SelectedItem as ITreeItem;
+            Detail = new DetailsItem(selected.FullPathName);
+            Notify();
         }
         public RelayCommand TreeClickEventCommand
         {

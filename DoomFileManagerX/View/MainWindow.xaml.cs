@@ -1,4 +1,5 @@
 ﻿using DoomFileManagerX.Models;
+using DoomFileManagerX.Models.TreeItems;
 using DoomFileManagerX.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -27,9 +28,11 @@ namespace DoomFileManagerX
         {
             InitializeComponent();
             DriveRootItem rootItem = new DriveRootItem();
+            rootItem.IncludeFileChildren = true;
             MainWindowView = new MainWindowViewModel(rootItem);
             base.DataContext = MainWindowView;
             mainTree.DataContext = MainWindowView;
+            detailsList.DataContext = MainWindowView;
         }
     }
 }

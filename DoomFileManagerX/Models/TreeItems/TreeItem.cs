@@ -5,13 +5,20 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
-namespace DoomFileManagerX.Models
+namespace DoomFileManagerX.Models.TreeItems
 {
     public abstract class TreeItem : ViewModelBase, ITreeItem
     {
         public string VisibleName { get; set; }
         public string FullPathName { get; set; }
+        protected BitmapSource myIcon;
+        public BitmapSource MyIcon
+        {
+            get { return myIcon ?? (myIcon = GetMyIcon()); }
+            set { myIcon = value; }
+        }
 
         protected ObservableCollection<ITreeItem> children;
         public ObservableCollection<ITreeItem> Children
@@ -27,6 +34,7 @@ namespace DoomFileManagerX.Models
             set => isExpanded = value;
         }
         public bool IncludeFileChildren { get; set; }
+        public abstract BitmapSource GetMyIcon();
         public abstract ObservableCollection<ITreeItem> GetMyChildren();
 
         public void DeleteChildren()
