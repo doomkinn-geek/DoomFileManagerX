@@ -10,21 +10,27 @@ namespace DoomFileManagerX.ViewModels
     {
         readonly ITreeItem _root;
         private ObservableCollection<ITreeItem> rootChildren = new ObservableCollection<ITreeItem> { };
-        public string WindowHeader => "Windows версия файлового менеджера";
-        public string MainTreeHeader => "Дерево папок";
-        public string DetailsHeader => "Содержимое текущей папки";
+        private string selectedPath;
+        private RelayCommand treeClickEventCommand;
+        private RelayCommand selectedPathFromTreeCommand;
+        public string WindowHeader => "Кросс платформенная версия файлового менеджера";
         public string Greeting => "Приветствие";
-        RelayCommand selectedPathFromTreeCommand;
         public ICommand SelectedPathFromTreeCommand => selectedPathFromTreeCommand ??
                        (selectedPathFromTreeCommand =
                               new RelayCommand(x => SelectedPath = x as string));
-        
-        private string selectedPath;
+        private void DoTreeClickEventCommand(object parameter)
+        {
+            int i = 0;
+        }
+        public RelayCommand TreeClickEventCommand
+        {
+            get { return treeClickEventCommand; }
+        }
         public string SelectedPath
         {
-            get => selectedPath;             
-            set 
-            {                
+            get => selectedPath;
+            set
+            {
                 selectedPath = value;
                 Notify();
             }
@@ -36,12 +42,13 @@ namespace DoomFileManagerX.ViewModels
         }
         public MainWindowViewModel(ITreeItem root)
         {
-            _root = root;                        
+            _root = root;
             this.rootChildren = new ObservableCollection<ITreeItem>(
                 new ITreeItem[]
                 {
                     _root,
-                });            
+                });
+            treeClickEventCommand = new RelayCommand(DoTreeClickEventCommand);
         }
     }
 }

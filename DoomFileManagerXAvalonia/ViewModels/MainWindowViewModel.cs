@@ -10,22 +10,27 @@ namespace DoomFileManagerX.ViewModels
     {
         readonly ITreeItem _root;
         private ObservableCollection<ITreeItem> rootChildren = new ObservableCollection<ITreeItem> { };
+        private string selectedPath;
+        private RelayCommand treeClickEventCommand;
+        private RelayCommand selectedPathFromTreeCommand;
         public string WindowHeader => "Кросс платформенная версия файлового менеджера";
-        public string Greeting => "Приветствие";
-        RelayCommand selectedPathFromTreeCommand;
+        public string Greeting => "Приветствие";        
         public ICommand SelectedPathFromTreeCommand => selectedPathFromTreeCommand ??
                        (selectedPathFromTreeCommand =
                               new RelayCommand(x => SelectedPath = x as string));
-
-        // Selected path set by command call when item is clicked
-        private string selectedPath;
+        private void DoTreeClickEventCommand(object parameter)
+        {
+            int i = 0;
+        }
+        public RelayCommand TreeClickEventCommand
+        {
+            get { return treeClickEventCommand; }
+        }
         public string SelectedPath
         {
-            get => selectedPath; 
-            //set => selectedPath = value;
+            get => selectedPath;             
             set 
-            {
-                //this.SetProperty(ref selectedPath, value, "SelectedPath");
+            {                
                 selectedPath = value;
                 Notify();
             }
@@ -43,6 +48,7 @@ namespace DoomFileManagerX.ViewModels
                 {
                     _root,
                 });
+            treeClickEventCommand = new RelayCommand(DoTreeClickEventCommand);
         }
     }
 }
