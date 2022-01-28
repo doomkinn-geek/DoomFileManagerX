@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:DoomFileManagerX.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
@@ -25,11 +25,12 @@
 								  VerticalAlignment="Stretch"
 								ItemsSource="{Binding Path=RootChildren}"								  
 								ItemTemplate="{StaticResource TreeTemplate}">
-        <i:Interaction.Triggers>
-            <i:EventTrigger EventName="SelectedItemChanged">
-                <i:InvokeCommandAction Command="{Binding TreeClickEventCommand}" CommandParameter="argument"/>
-            </i:EventTrigger>
-        </i:Interaction.Triggers>
+        <!--https://github.com/JonghoL/EventBindingMarkup-->
+        <behaviors:Interaction.Triggers>
+            <behaviors:EventTrigger EventName="SelectedItemChanged">
+                <behaviors:InvokeCommandAction Command="{Binding TreeClickEventCommand}" CommandParameter="argument"/>
+            </behaviors:EventTrigger>
+        </behaviors:Interaction.Triggers>
         <TreeView.ItemContainerStyle>
             <Style TargetType="{x:Type TreeViewItem}">
                 <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
