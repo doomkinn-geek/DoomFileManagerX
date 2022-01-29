@@ -24,7 +24,7 @@ namespace DoomFileManagerX.Models.DetailsItems
             get 
             {
                 string attrib;
-                attrib = "               Атрибуты: ";
+                attrib = "Атрибуты: ";
                 if (attributes.HasFlag(FileAttributes.ReadOnly))
                     attrib += "Только для чтения | ";
                 if (attributes.HasFlag(FileAttributes.Archive))
@@ -33,7 +33,7 @@ namespace DoomFileManagerX.Models.DetailsItems
                     attrib += "Системный | ";
                 if (attributes.HasFlag(FileAttributes.Hidden))
                     attrib += "Скрытый | ";
-                if (attrib != "               Атрибуты: ")
+                if (attrib != "Атрибуты: ")
                 {
                     attrib = attrib.Substring(0, attrib.Length - 3);                    
                 }
@@ -45,14 +45,21 @@ namespace DoomFileManagerX.Models.DetailsItems
         public event PropertyChangedEventHandler PropertyChanged;
         public DetailsItem(string path)
         {
-            fullPathName = path;
-            FileAttributes attr = File.GetAttributes(FullPathName);
-            attributes = attr;
-            if (attr.HasFlag(FileAttributes.Directory))
+            try
             {
-                DirectoryInfo di = new DirectoryInfo(FullPathName);
-                creationTime = di.CreationTime;
-                lastModifiedTime = di.LastWriteTime;
+                fullPathName = path;
+                FileAttributes attr = File.GetAttributes(FullPathName);
+                attributes = attr;
+                if (attr.HasFlag(FileAttributes.Directory))
+                {
+                    DirectoryInfo di = new DirectoryInfo(FullPathName);
+                    creationTime = di.CreationTime;
+                    lastModifiedTime = di.LastWriteTime;
+                }
+            }
+            catch (Exception ex)
+            {
+                return;
             }
         }
     }

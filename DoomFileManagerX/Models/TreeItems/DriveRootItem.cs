@@ -19,9 +19,10 @@ namespace DoomFileManagerX.Models.TreeItems
         }
 
         public override BitmapSource GetMyIcon()
-        {            
-            string Param = "pack://application:,,,/" + "MyImages/bullet_blue.png";
-            Uri uri1 = new Uri(Param, UriKind.RelativeOrAbsolute);
+        {
+            string Param = "pack://application:,,,/Assets/bullet_blue.png";
+            //string Param = "/Assets/bullet_blue.png";
+            Uri uri1 = new Uri(Param, UriKind.Absolute);
             return myIcon = BitmapFrame.Create(uri1);
         }
         public override ObservableCollection<ITreeItem> GetMyChildren()
