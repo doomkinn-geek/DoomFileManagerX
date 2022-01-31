@@ -75,6 +75,7 @@
     <Compile Include="Models\DetailsItems\IDetailsItem.cs" />
     <Compile Include="Utility\GetIcon.cs" />
     <Compile Include="Utility\GetIconUseDll.cs" />
+    <Compile Include="Utility\SizeCalculation.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="View\DetailsListView.xaml">

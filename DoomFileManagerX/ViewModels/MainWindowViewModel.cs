@@ -63,6 +63,7 @@ namespace DoomFileManagerX.ViewModels
                     _root,
                 });
             treeClickEventCommand = new RelayCommand(DoTreeClickEventCommand);
+            Detail = new DetailsItem(_root.FullPathName);
         }
     }
 }

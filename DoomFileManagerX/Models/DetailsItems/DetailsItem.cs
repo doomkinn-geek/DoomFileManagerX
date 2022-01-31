@@ -1,10 +1,12 @@
-﻿using DoomFileManagerX.ViewModels;
+﻿using DoomFileManagerX.Utility;
+using DoomFileManagerX.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DoomFileManagerX.Models.DetailsItems
@@ -16,6 +18,9 @@ namespace DoomFileManagerX.Models.DetailsItems
         private DateTime lastModifiedTime { get; set; }
         private FileAttributes attributes { get; set; }
         private long fullSize { get; set; }
+        static readonly CancellationTokenSource cancelTokenSource;
+        private static CancellationToken token;
+        private static Task CalculateFolderSize;
         public string FullPathName { get => fullPathName; }
         public string CreationTime { get => creationTime.ToString("dd.MM.yyyy"); }        
         public string LastModifiedTime { get => lastModifiedTime.ToString("dd.MM.yyyy"); }
@@ -23,8 +28,7 @@ namespace DoomFileManagerX.Models.DetailsItems
         {
             get 
             {
-                string attrib;
-                attrib = "Атрибуты: ";
+                string attrib = "";                
                 if (attributes.HasFlag(FileAttributes.ReadOnly))
                     attrib += "Только для чтения | ";
                 if (attributes.HasFlag(FileAttributes.Archive))
@@ -32,17 +36,31 @@ namespace DoomFileManagerX.Models.DetailsItems
                 if (attributes.HasFlag(FileAttributes.System))
                     attrib += "Системный | ";
                 if (attributes.HasFlag(FileAttributes.Hidden))
-                    attrib += "Скрытый | ";
-                if (attrib != "Атрибуты: ")
+                    attrib += "Скрытый";
+                if (attrib.Substring(attrib.Length - 2, 2) == "| ")
                 {
-                    attrib = attrib.Substring(0, attrib.Length - 3);                    
+                    attrib = attrib.Substring(0, attrib.Length - 2);                    
                 }
                 return attrib;
             }
         }
-        public long FullSize { get => fullSize; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public string FullSize
+        {
+            get
+            {
+                SizeCalculation.GetTotalSize(FullSize, ref fullSize, null);
+                string size;
+                try
+                {
+                    size = SizeCalculation.ToPrettySize(fullSize);
+                }
+                catch (Exception)
+                {
+                    size = "0";
+                }
+                return size;
+            }
+        }        
         public DetailsItem(string path)
         {
             try
@@ -56,11 +74,17 @@ namespace DoomFileManagerX.Models.DetailsItems
                     creationTime = di.CreationTime;
                     lastModifiedTime = di.LastWriteTime;
                 }
+                else
+                {
+                    FileInfo fi = new FileInfo(FullPathName);
+                    creationTime = fi.CreationTime;
+                    lastModifiedTime = fi.LastWriteTime;
+                }
             }
             catch (Exception ex)
             {
                 return;
             }
-        }
+        }        
     }
 }

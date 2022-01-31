@@ -14,6 +14,6 @@ namespace DoomFileManagerX.Models.DetailsItems
         string CreationTime { get; }
         string LastModifiedTime { get; }
         string Attributes { get; }
-        long FullSize { get; }
+        string FullSize { get; }
     }
 }
