@@ -39,7 +39,7 @@
             <TextBlock Grid.Row="4" Grid.Column="0"
                                 Text="Общий объём:" Foreground="Black"/>
             <TextBlock Grid.Row="4" Grid.Column="1"
-                                Text="{Binding Detail.FullSize, IsAsync=True, FallbackValue=|Расчитывается...|}" Foreground="Black"/>
+                                Text="{Binding Detail.FullSize, IsAsync=True}" Foreground="Black"/>
         </Grid>
     </Border>
 </UserControl>

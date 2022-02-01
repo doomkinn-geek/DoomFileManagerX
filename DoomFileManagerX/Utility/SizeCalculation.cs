@@ -13,17 +13,7 @@ namespace DoomFileManagerX.Utility
         private const long OneKb = 1024;
         private const long OneMb = OneKb * 1024;
         private const long OneGb = OneMb * 1024;
-        private const long OneTb = OneGb * 1024;
-
-        public static CancellationTokenSource cancelTokenSource;
-        public static CancellationToken token;
-        public static Task CalculateFolderSize;
-        static SizeCalculation()
-        {
-            cancelTokenSource = new CancellationTokenSource();
-            token = cancelTokenSource.Token;
-
-        }
+        private const long OneTb = OneGb * 1024;        
         public static string ToPrettySize(this long value, int decimalPlaces = 0)//функция округляет числа с размерами файлов, чтобы удобнее их было читать
         {
             var asTb = Math.Round((double)value / OneTb, decimalPlaces);
@@ -34,11 +24,12 @@ namespace DoomFileManagerX.Utility
                 : asGb > 1 ? string.Format("{0} Gb", asGb)
                 : asMb > 1 ? string.Format("{0} Mb", asMb)
                 : asKb > 1 ? string.Format("{0} Kb", asKb)
-                : string.Format("{0}  B", Math.Round((double)value, decimalPlaces));
+                : string.Format("{0} B", Math.Round((double)value, decimalPlaces));
             return chosenValue;
-        }
-        public static void GetTotalSize(string directory, ref long totalSize, CancellationToken cancelation)
+        }        
+        public static long GetTotalSize(string directory)
         {
+            long totalSize = 0;
             string[] files;
             try
             {
@@ -46,29 +37,19 @@ namespace DoomFileManagerX.Utility
             }
             catch (Exception)
             {
-                return;
+                return -1;
             }
             foreach (string file in files)
-            {
-                if (cancelation.IsCancellationRequested)
-                {
-                    totalSize = -1;
-                    return;
-                }
+            {                
                 totalSize += GetFileSize(file);
             }
 
             string[] subDirs = System.IO.Directory.GetDirectories(directory);
             foreach (string dir in subDirs)
             {
-                if (cancelation.IsCancellationRequested)
-                {
-                    totalSize = -1;
-                    return;
-                }
-                GetTotalSize(dir, ref totalSize, cancelation);
+                totalSize += GetTotalSize(dir);
             }
-            return;
+            return totalSize;
         }
 
         private static long GetFileSize(string path)

@@ -17,10 +17,8 @@ namespace DoomFileManagerX.Models.DetailsItems
         private DateTime creationTime { get; set; }
         private DateTime lastModifiedTime { get; set; }
         private FileAttributes attributes { get; set; }
-        private long fullSize { get; set; }
-        static readonly CancellationTokenSource cancelTokenSource;
-        private static CancellationToken token;
-        private static Task CalculateFolderSize;
+        private long fullSize { get; set; }   
+        private string prettySize { get; set; }
         public string FullPathName { get => fullPathName; }
         public string CreationTime { get => creationTime.ToString("dd.MM.yyyy"); }        
         public string LastModifiedTime { get => lastModifiedTime.ToString("dd.MM.yyyy"); }
@@ -46,21 +44,32 @@ namespace DoomFileManagerX.Models.DetailsItems
         }
         public string FullSize
         {
-            get
+            get => prettySize;
+            set
             {
-                SizeCalculation.GetTotalSize(FullSize, ref fullSize, null);
-                string size;
+                prettySize = value;
+                Notify();
+            }
+        }
+        public async void FullSizeTask()
+        {
+            FullSize = "<Расчитывается...>";
+             await Task.Run(() =>
+            {
+                long fullDirSize = 0;
+                string size = "-1";
+                fullDirSize = SizeCalculation.GetTotalSize(this.FullPathName);                    
                 try
                 {
-                    size = SizeCalculation.ToPrettySize(fullSize);
+                    size = SizeCalculation.ToPrettySize(fullDirSize);
+                    FullSize = size;
                 }
                 catch (Exception)
                 {
                     size = "0";
-                }
-                return size;
-            }
-        }        
+                }                
+            });
+        }
         public DetailsItem(string path)
         {
             try
@@ -85,6 +94,7 @@ namespace DoomFileManagerX.Models.DetailsItems
             {
                 return;
             }
+            FullSizeTask();
         }        
     }
 }
