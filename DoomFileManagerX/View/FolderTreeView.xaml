@@ -18,6 +18,7 @@
                 <TextBlock Text="{Binding VisibleName, Mode=OneTime}"
                        HorizontalAlignment="Stretch">
                 </TextBlock>
+                <TextBlock Text="{Binding FullSize, Mode=OneTime}"></TextBlock>
             </StackPanel>            
         </HierarchicalDataTemplate>
     </UserControl.Resources>

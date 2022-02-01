@@ -52,7 +52,7 @@ namespace DoomFileManagerX.Utility
             return totalSize;
         }
 
-        private static long GetFileSize(string path)
+        public static long GetFileSize(string path)
         {
             try
             {
