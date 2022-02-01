@@ -5,9 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
              xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:DoomFileManagerX.View"
+             xmlns:conv="clr-namespace:DoomFileManagerX.Converters"
+             xmlns:tree="clr-namespace:DoomFileManagerX.Models.TreeItems"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
+        <conv:AddSpaceToSizeConverter x:Key="SpaceConverter" />
         <HierarchicalDataTemplate x:Key="TreeTemplate" ItemsSource="{Binding Path=Children}" >
             <StackPanel Orientation="Horizontal" Margin="0" VerticalAlignment="Stretch" >
                 <Image
@@ -18,9 +21,9 @@
                 <TextBlock Text="{Binding VisibleName, Mode=OneTime}"
                        HorizontalAlignment="Stretch">
                 </TextBlock>
-                <TextBlock Text="{Binding FullSize, Mode=OneTime}"></TextBlock>
+                <TextBlock Text="{Binding Path=(tree:FileItem.FullSize), Converter={StaticResource SpaceConverter}, Mode=OneTime}"></TextBlock>
             </StackPanel>            
-        </HierarchicalDataTemplate>
+        </HierarchicalDataTemplate>        
     </UserControl.Resources>
     <TreeView x:Name="treeView"
             ScrollViewer.VerticalScrollBarVisibility="Visible"

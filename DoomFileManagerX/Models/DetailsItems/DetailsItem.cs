@@ -54,7 +54,7 @@ namespace DoomFileManagerX.Models.DetailsItems
         public async void FullSizeTask()
         {
             FullSize = "<Расчитывается...>";
-             await Task.Run(() =>
+            await Task.Run(() =>
             {
                 long fullDirSize = 0;
                 string size = "-1";

@@ -21,7 +21,7 @@ namespace DoomFileManagerX.Models.TreeItems
             ObservableCollection<ITreeItem> childrenList = new ObservableCollection<ITreeItem>() { };
             return childrenList;
         }
-        string FullSize 
+        public string FullSize 
         { 
             get
             {
