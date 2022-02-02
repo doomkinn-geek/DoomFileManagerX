@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
@@ -70,13 +73,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\AsyncCommandBase.cs" />
+    <Compile Include="Commands\AsyncRelayCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\AddSpaceToSizeConverter.cs" />
     <Compile Include="Models\DetailsItems\DetailsItem.cs" />
     <Compile Include="Models\DetailsItems\IDetailsItem.cs" />
+    <Compile Include="Services\CopyService.cs" />
+    <Compile Include="Services\IFileSystemService.cs" />
     <Compile Include="Utility\GetIcon.cs" />
     <Compile Include="Utility\GetIconUseDll.cs" />
-    <Compile Include="Utility\Operations.cs" />
     <Compile Include="Utility\SizeCalculation.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />

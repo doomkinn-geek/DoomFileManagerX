@@ -17,8 +17,8 @@
         </Grid.RowDefinitions>
         
         <StackPanel Grid.Row="0" Margin="5" Orientation="Horizontal">
-            <Label Content="Текущая папка: " FontSize="12"/>
-            <TextBlock FontSize="12" Padding="5" Text="{Binding Detail.FullPathName}"/>
+            <Label Content="Статус: " FontSize="12"/>
+            <TextBlock FontSize="12" Padding="5" Text="{Binding StatusMessage}"/>
         </StackPanel>
         
         <Grid Row="1">
@@ -35,10 +35,30 @@
                     </Grid.RowDefinitions>
                     <vw:FolderTreeView x:Name="mainTree" Grid.Row="0"/>
                     <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">
-                        <Button Content="Копировать" Width="75" Margin="5,5,5,5"></Button>
+                        <Button Content="Копировать" 
+                                Width="75" 
+                                Margin="5,5,5,5"                                 
+                                Command="{Binding CopyClickCommand}" 
+                                CommandParameter="{Binding ElementName=mainTree}"/>
+                        <Button Content="Вырезать" 
+                                Width="75" 
+                                Margin="5,5,5,5"                                 
+                                Command="{Binding CutClickCommand}" 
+                                CommandParameter="{Binding ElementName=mainTree}"/>
                         <Button Content="Удалить" Width="50" Margin="5,5,5,5"></Button>
                         <Button Content="Переименовать" Width="95" Margin="5,5,5,5"></Button>
-                        <Button Content="Вставить" Width="55" Margin="5,5,5,5"></Button>
+                        <Button Content="Вставить" Width="55" Margin="5,5,5,5">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding PossibleToPaste}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
                     </StackPanel>
                 </Grid>
             </GroupBox>

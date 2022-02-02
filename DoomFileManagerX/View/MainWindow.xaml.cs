@@ -31,7 +31,7 @@ namespace DoomFileManagerX
             rootItem.IncludeFileChildren = true;
             MainWindowView = new MainWindowViewModel(rootItem);
             base.DataContext = MainWindowView;
-            mainTree.DataContext = MainWindowView;
+            mainTree.DataContext = MainWindowView;            
             detailsList.DataContext = MainWindowView;
         }
     }

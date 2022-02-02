@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoomFileManagerX.Models.TreeItems;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,14 @@ namespace DoomFileManagerX.View
         public FolderTreeView()
         {
             InitializeComponent();
+        }
+        public string SelectedItemPath
+        {
+            get
+            {
+                ITreeItem selected = treeView.SelectedItem as ITreeItem;
+                return selected.FullPathName;
+            }
         }
     }
 }
