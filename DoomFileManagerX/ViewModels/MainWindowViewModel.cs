@@ -26,10 +26,7 @@ namespace DoomFileManagerX.ViewModels
         readonly ITreeItem _root;
         private IDetailsItem _detail;
         private ObservableCollection<ITreeItem> rootChildren = new ObservableCollection<ITreeItem> { };
-        private string selectedPath;
-        private RelayCommand treeClickEventCommand;
-        private RelayCommand copyClickCommand;
-        private RelayCommand cutClickCommand;
+        private string selectedPath;        
 
         private OperationType operationType;        
         public string WindowHeader => "Windows версия файлового менеджера";
@@ -52,15 +49,19 @@ namespace DoomFileManagerX.ViewModels
         }
         public RelayCommand TreeClickEventCommand
         {
-            get { return treeClickEventCommand; }
+            get;
         }
         public RelayCommand CopyClickCommand
         {
-            get { return copyClickCommand; }
+            get;
         }
         public RelayCommand CutClickCommand
         {
-            get { return cutClickCommand; }
+            get;
+        }
+        public RelayCommand PasteClickCommand
+        {
+            get;
         }
         private void SetStartPathCommandCopy(object parameter)
         {
@@ -91,7 +92,7 @@ namespace DoomFileManagerX.ViewModels
                 StartPath = null;
                 operationType = OperationType.NotDefined;
             }
-        }
+        }        
         public string SelectedPath
         {
             get => selectedPath;
@@ -148,6 +149,8 @@ namespace DoomFileManagerX.ViewModels
         }
         public bool PossibleToPaste => !string.IsNullOrEmpty(StartPath);
         public ICommand CopyCommand { get; }
+        public ICommand DeleteCommand { get; }
+        public ICommand PasteCommand { get; }
         private async Task Copy()
         {
             List<string> p = new List<string>();
@@ -155,6 +158,33 @@ namespace DoomFileManagerX.ViewModels
             p.Add(EndPath);
             await new CopyService().Action(p, this);
         }
+        private async Task Paste(object parameter)
+        {
+            try
+            {
+                string param = ((FolderTreeView)parameter).SelectedItemPath;
+                EndPath = param;                
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = ex.Message;
+                EndPath = null;
+                return;
+            }
+            List<string> p = new List<string>();
+            switch(operationType)
+            {
+                case OperationType.Copy:
+                    {
+                        await Copy();
+                        break;
+                    }
+                case OperationType.Cut:
+                    {
+                        break;
+                    }
+            }            
+        }        
         public MainWindowViewModel(ITreeItem root)
         {
             _root = root;
@@ -163,11 +193,12 @@ namespace DoomFileManagerX.ViewModels
                 {
                     _root,
                 });
-            treeClickEventCommand = new RelayCommand(DoTreeClickEventCommand);
-            copyClickCommand = new RelayCommand(SetStartPathCommandCopy);
-            cutClickCommand = new RelayCommand(SetStartPathCommandCut);
+            TreeClickEventCommand = new RelayCommand(DoTreeClickEventCommand);
+            CopyClickCommand = new RelayCommand(SetStartPathCommandCopy);
+            CutClickCommand = new RelayCommand(SetStartPathCommandCut);
             Detail = new DetailsItem(_root.FullPathName);
             CopyCommand = new AsyncRelayCommand(Copy, (ex) => StatusMessage = ex.Message);
+            PasteCommand = new AsyncRelayCommand(Paste, (ex) => StatusMessage = ex.Message);
             operationType = OperationType.NotDefined;
         }
     }

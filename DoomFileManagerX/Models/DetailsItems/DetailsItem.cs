@@ -24,9 +24,9 @@ namespace DoomFileManagerX.Models.DetailsItems
         public string LastModifiedTime { get => lastModifiedTime.ToString("dd.MM.yyyy"); }
         public string Attributes
         {
-            get 
+            get
             {
-                string attrib = "";                
+                string attrib = "";
                 if (attributes.HasFlag(FileAttributes.ReadOnly))
                     attrib += "Только для чтения | ";
                 if (attributes.HasFlag(FileAttributes.Archive))
@@ -35,9 +35,12 @@ namespace DoomFileManagerX.Models.DetailsItems
                     attrib += "Системный | ";
                 if (attributes.HasFlag(FileAttributes.Hidden))
                     attrib += "Скрытый";
-                if (attrib.Substring(attrib.Length - 2, 2) == "| ")
+                if (attrib.Length >= 2)
                 {
-                    attrib = attrib.Substring(0, attrib.Length - 2);                    
+                    if (attrib.Substring(attrib.Length - 2, 2) == "| ")
+                    {
+                        attrib = attrib.Substring(0, attrib.Length - 2);
+                    }
                 }
                 return attrib;
             }

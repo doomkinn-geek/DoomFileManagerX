@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DoomFileManagerX"
         xmlns:vw="clr-namespace:DoomFileManagerX.View"
         mc:Ignorable="d"
-        Height="450" Width="800"
+        Height="450" Width="879"
         Icon="/Assets/avalonia-logo.ico"
         Title="{Binding WindowHeader}">
 
@@ -23,7 +23,8 @@
         
         <Grid Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="450"/>
+                <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
@@ -36,18 +37,31 @@
                     <vw:FolderTreeView x:Name="mainTree" Grid.Row="0"/>
                     <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal">
                         <Button Content="Копировать" 
-                                Width="75" 
-                                Margin="5,5,5,5"                                 
+                                Width="75"
+                                Height="30"
+                                Margin="5,5,5,5"
                                 Command="{Binding CopyClickCommand}" 
                                 CommandParameter="{Binding ElementName=mainTree}"/>
                         <Button Content="Вырезать" 
                                 Width="75" 
+                                Height="30"
                                 Margin="5,5,5,5"                                 
                                 Command="{Binding CutClickCommand}" 
                                 CommandParameter="{Binding ElementName=mainTree}"/>
-                        <Button Content="Удалить" Width="50" Margin="5,5,5,5"></Button>
-                        <Button Content="Переименовать" Width="95" Margin="5,5,5,5"></Button>
-                        <Button Content="Вставить" Width="55" Margin="5,5,5,5">
+                        <Button Content="Удалить" 
+                                Width="50"
+                                Height="30"
+                                Margin="5,5,5,5"></Button>
+                        <Button Content="Переименовать" 
+                                Width="95" 
+                                Height="30"
+                                Margin="5,5,5,5"></Button>
+                        <Button Content="Вставить" 
+                                Width="55" 
+                                Height="30"
+                                Margin="5,5,5,5"
+                                Command="{Binding PasteCommand}" 
+                                CommandParameter="{Binding ElementName=mainTree}">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -62,8 +76,9 @@
                     </StackPanel>
                 </Grid>
             </GroupBox>
-            
-            <GroupBox Grid.Column="1" Header="Подробности">
+            <GridSplitter Grid.Row="0" Grid.Column="1" Background="LightGray"
+                       Width="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <GroupBox Grid.Column="2" Header="Подробности">
                 <vw:DetailsListView x:Name="detailsList" Grid.Row="1"/>
             </GroupBox>
         </Grid>

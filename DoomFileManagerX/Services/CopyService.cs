@@ -21,6 +21,10 @@ namespace DoomFileManagerX.Services
             }
             string StartDirectory = parameters[0];
             string EndDirectory = parameters[1];
+            if(StartDirectory.Trim() == EndDirectory.Trim())
+            {
+                throw new Exception("Невозможно скопировать сам в себя");
+            }
             foreach (string dirPath in Directory.GetDirectories(StartDirectory, "*", SearchOption.AllDirectories))
             {
                 Directory.CreateDirectory(dirPath.Replace(StartDirectory, EndDirectory));
