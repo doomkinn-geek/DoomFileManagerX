@@ -60,7 +60,7 @@
                                 Width="55" 
                                 Height="30"
                                 Margin="5,5,5,5"
-                                Command="{Binding PasteCommand}" 
+                                Command="{Binding PasteClickCommand}" 
                                 CommandParameter="{Binding ElementName=mainTree}">
                             <Button.Style>
                                 <Style TargetType="Button">

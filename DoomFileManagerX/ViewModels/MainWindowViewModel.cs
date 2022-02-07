@@ -92,7 +92,21 @@ namespace DoomFileManagerX.ViewModels
                 StartPath = null;
                 operationType = OperationType.NotDefined;
             }
-        }        
+        }
+        private void SetEndPathPaste(object parameter)
+        {
+            try
+            {
+                string param = ((FolderTreeView)parameter).SelectedItemPath;
+                EndPath = param;                
+                this.Paste();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = ex.Message;
+                EndPath = null;                
+            }
+        }
         public string SelectedPath
         {
             get => selectedPath;
@@ -158,12 +172,12 @@ namespace DoomFileManagerX.ViewModels
             p.Add(EndPath);
             await new CopyService().Action(p, this);
         }
-        private async Task Paste(object parameter)
+        private async Task Paste(object parameters)
         {
             try
             {
-                string param = ((FolderTreeView)parameter).SelectedItemPath;
-                EndPath = param;                
+                string param = ((FolderTreeView)parameters).SelectedItemPath;
+                EndPath = param;
             }
             catch (Exception ex)
             {
@@ -171,8 +185,7 @@ namespace DoomFileManagerX.ViewModels
                 EndPath = null;
                 return;
             }
-            List<string> p = new List<string>();
-            switch(operationType)
+            switch (operationType)
             {
                 case OperationType.Copy:
                     {
@@ -196,6 +209,7 @@ namespace DoomFileManagerX.ViewModels
             TreeClickEventCommand = new RelayCommand(DoTreeClickEventCommand);
             CopyClickCommand = new RelayCommand(SetStartPathCommandCopy);
             CutClickCommand = new RelayCommand(SetStartPathCommandCut);
+            PasteClickCommand = new RelayCommand(SetEndPathPaste);
             Detail = new DetailsItem(_root.FullPathName);
             CopyCommand = new AsyncRelayCommand(Copy, (ex) => StatusMessage = ex.Message);
             PasteCommand = new AsyncRelayCommand(Paste, (ex) => StatusMessage = ex.Message);
