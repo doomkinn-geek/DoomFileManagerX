@@ -17,8 +17,8 @@
         </Grid.RowDefinitions>
         
         <StackPanel Grid.Row="0" Margin="5" Orientation="Horizontal">
-            <Label Content="Статус: " FontSize="12"/>
-            <TextBlock FontSize="12" Padding="5" Text="{Binding StatusMessage}"/>
+            <Label Content="Статус: " FontSize="18"/>
+            <TextBlock FontSize="18" Padding="5" Text="{Binding StatusMessage}"/>
         </StackPanel>
         
         <Grid Row="1">
@@ -60,7 +60,7 @@
                                 Width="55" 
                                 Height="30"
                                 Margin="5,5,5,5"
-                                Command="{Binding PasteClickCommand}" 
+                                Command="{Binding PasteCommand}" 
                                 CommandParameter="{Binding ElementName=mainTree}">
                             <Button.Style>
                                 <Style TargetType="Button">
@@ -78,7 +78,7 @@
             </GroupBox>
             <GridSplitter Grid.Row="0" Grid.Column="1" Background="LightGray"
                        Width="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            <GroupBox Grid.Column="2" Header="Подробности">
+            <GroupBox Grid.Column="2" FontSize="14" Header="Подробности">
                 <vw:DetailsListView x:Name="detailsList" Grid.Row="1"/>
             </GroupBox>
         </Grid>

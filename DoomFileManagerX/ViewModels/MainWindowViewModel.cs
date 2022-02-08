@@ -98,8 +98,7 @@ namespace DoomFileManagerX.ViewModels
             try
             {
                 string param = ((FolderTreeView)parameter).SelectedItemPath;
-                EndPath = param;                
-                this.Paste();
+                EndPath = param;
             }
             catch (Exception ex)
             {
@@ -212,7 +211,7 @@ namespace DoomFileManagerX.ViewModels
             PasteClickCommand = new RelayCommand(SetEndPathPaste);
             Detail = new DetailsItem(_root.FullPathName);
             CopyCommand = new AsyncRelayCommand(Copy, (ex) => StatusMessage = ex.Message);
-            PasteCommand = new AsyncRelayCommand(Paste, (ex) => StatusMessage = ex.Message);
+            PasteCommand = new AsyncRelayCommandWithParam(Paste, (ex) => StatusMessage = ex.Message);
             operationType = OperationType.NotDefined;
         }
     }

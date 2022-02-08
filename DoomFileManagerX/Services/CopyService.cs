@@ -53,6 +53,9 @@ namespace DoomFileManagerX.Services
                     }
                 }
             }
+            _viewModel.StatusMessage = "Копирование завершено...";
+            _viewModel.StartPath = String.Empty;
+            _viewModel.EndPath = String.Empty;
         }
     }
 }

@@ -75,6 +75,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\AsyncCommandBase.cs" />
     <Compile Include="Commands\AsyncRelayCommand.cs" />
+    <Compile Include="Commands\AsyncRelayCommandWithParam.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Converters\AddSpaceToSizeConverter.cs" />
     <Compile Include="Models\DetailsItems\DetailsItem.cs" />
