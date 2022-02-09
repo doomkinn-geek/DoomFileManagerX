@@ -6,10 +6,9 @@ using System.Text;
 
 namespace DoomFileManagerX.ViewModels
 {
-    //public class ViewModelBase : ReactiveObject
     public class ViewModelBase : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;       
+        public event PropertyChangedEventHandler? PropertyChanged;       
 
         public virtual void Notify([CallerMemberName] string propName = null)
         {
