@@ -11,23 +11,27 @@
         Title="{Binding WindowHeader}">
 
     <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="193*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="0" Margin="5" Orientation="Horizontal">
+
+        <StackPanel Grid.Row="0" Margin="5,5,5,5" Orientation="Horizontal" Grid.ColumnSpan="2">
             <Label Content="Статус: " FontSize="18"/>
             <TextBlock FontSize="18" Padding="5" Text="{Binding StatusMessage}"/>
         </StackPanel>
-        
-        <Grid Row="1">
+
+        <Grid Row="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="450"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <GroupBox Header="{Binding MainTreeHeader}" Grid.Column="0">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -47,15 +51,18 @@
                                 Height="30"
                                 Margin="5,5,5,5"                                 
                                 Command="{Binding CutClickCommand}" 
-                                CommandParameter="{Binding ElementName=mainTree}"/>
+                                CommandParameter="{Binding ElementName=mainTree}"
+                                Visibility="Hidden"/>
                         <Button Content="Удалить" 
                                 Width="50"
                                 Height="30"
-                                Margin="5,5,5,5"></Button>
+                                Margin="5,5,5,5"
+                                Visibility="Hidden"></Button>
                         <Button Content="Переименовать" 
                                 Width="95" 
                                 Height="30"
-                                Margin="5,5,5,5"></Button>
+                                Margin="5,5,5,5"
+                                Visibility="Hidden"></Button>
                         <Button Content="Вставить" 
                                 Width="55" 
                                 Height="30"
